@@ -20,7 +20,7 @@ dependencies = [
     "sentence-transformers>=5.1.1",
     "tiktoken>=0.12.0",
     "tqdm>=4.67.1",
-    "torch==2.7.0",
+    "torch==2.13.0",
     "trl>=0.23.1",
     "recbole==1.2.1",
     "notebook>=7.4.7",
