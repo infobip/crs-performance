@@ -1,0 +1,51 @@
+{
+  "timestamp": "2026-06-01T20:44:15.529008+00:00",
+  "source_notebook": "08_recbole_evaluation.ipynb",
+  "models": [
+    "Pop",
+    "Random",
+    "BPR",
+    "ItemKNN",
+    "EASE",
+    "LightGCN"
+  ],
+  "config": {
+    "retrain_final_models": false,
+    "allow_stale_checkpoints": false,
+    "ranked_list_top_n": 100,
+    "metric_cutoffs": [
+      1,
+      5,
+      10
+    ]
+  },
+  "dataset_paths": {
+    "train": "../data/recbole/redial/redial.train.inter",
+    "valid": "../data/recbole/redial/redial.valid.inter",
+    "test": "../data/recbole/redial/redial.test.inter",
+    "catalog": "../data/recbole/redial/redial.item",
+    "metadata": "../data/processed/movies_metadata_tmdb.csv"
+  },
+  "hyperparameter_source": "../data/recbole/hpo_results/best_hyperparameters.json",
+  "checkpoint_paths": {
+    "Pop": "../data/recbole/final_models/Pop.pth",
+    "Random": "../data/recbole/final_models/Random.pth",
+    "BPR": "../data/recbole/final_models/BPR.pth",
+    "ItemKNN": "../data/recbole/final_models/ItemKNN.pth",
+    "EASE": "../data/recbole/final_models/EASE.pth",
+    "LightGCN": "../data/recbole/final_models/LightGCN.pth"
+  },
+  "checkpoint_decisions": {
+    "Pop": "loaded",
+    "Random": "loaded",
+    "BPR": "trained",
+    "ItemKNN": "loaded",
+    "EASE": "trained",
+    "LightGCN": "trained"
+  },
+  "output_files": [
+    "../data/recbole/evaluation_results/cf_ranked_lists.parquet",
+    "../data/recbole/evaluation_results/cf_aggregate_metrics.parquet"
+  ],
+  "git_commit": "d0a809c24d1f4ce5ac89dde3c7525bc9eb33554a"
+}

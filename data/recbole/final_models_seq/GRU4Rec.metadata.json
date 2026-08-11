@@ -1,0 +1,82 @@
+{
+  "model_name": "GRU4Rec",
+  "model_family": "sequential",
+  "dataset_name": "redial_seq",
+  "config": {
+    "data_path": "../data/recbole",
+    "dataset": "redial_seq",
+    "benchmark_filename": [
+      "train",
+      "valid",
+      "test"
+    ],
+    "USER_ID_FIELD": "user_id",
+    "ITEM_ID_FIELD": "item_id",
+    "LIST_SUFFIX": "_list",
+    "ITEM_LIST_LENGTH_FIELD": "item_length",
+    "load_col": {
+      "inter": [
+        "user_id",
+        "item_id",
+        "item_id_list"
+      ]
+    },
+    "MAX_ITEM_LIST_LENGTH": 50,
+    "alias_of_item_id": [
+      "item_id_list"
+    ],
+    "repeatable": true,
+    "epochs": 100,
+    "train_batch_size": 2048,
+    "eval_batch_size": 2048,
+    "learning_rate": 0.01,
+    "stopping_step": 5,
+    "eval_args": {
+      "group_by": "user",
+      "order": "TO",
+      "split": {
+        "LS": "valid_and_test"
+      },
+      "mode": "full"
+    },
+    "metrics": [
+      "Recall",
+      "MRR",
+      "NDCG",
+      "Hit",
+      "Precision"
+    ],
+    "topk": [
+      1,
+      5,
+      10
+    ],
+    "valid_metric": "NDCG@10",
+    "train_neg_sample_args": null,
+    "device": "cuda",
+    "seed": 42,
+    "reproducibility": true,
+    "show_progress": false,
+    "log_wandb": false,
+    "state": "INFO",
+    "model": "GRU4Rec",
+    "hidden_size": 128,
+    "num_layers": 1,
+    "dropout_prob": 0.4
+  },
+  "best_hyperparameters": {
+    "hidden_size": 128,
+    "num_layers": 1,
+    "dropout_prob": 0.4,
+    "learning_rate": 0.01
+  },
+  "seed": 42,
+  "source_hyperparameter_file": "../data/recbole/hpo_results_seq/best_hyperparameters.json",
+  "source_data_files": [
+    "../data/recbole/redial_seq/redial_seq.train.inter",
+    "../data/recbole/redial_seq/redial_seq.valid.inter",
+    "../data/recbole/redial_seq/redial_seq.test.inter"
+  ],
+  "timestamp": "2026-06-01T20:19:59.061144+00:00",
+  "git_commit": "f97020dd202baaea8670632f4c5e9b42a0740ca8"
+}

@@ -1,0 +1,72 @@
+{
+  "model_name": "EASE",
+  "model_family": "cf",
+  "dataset_name": "redial",
+  "config": {
+    "data_path": "../data/recbole",
+    "dataset": "redial",
+    "benchmark_filename": [
+      "train",
+      "valid",
+      "test"
+    ],
+    "USER_ID_FIELD": "user_id",
+    "ITEM_ID_FIELD": "item_id",
+    "TIME_FIELD": "timestamp",
+    "load_col": {
+      "inter": [
+        "user_id",
+        "item_id",
+        "timestamp"
+      ]
+    },
+    "MAX_ITEM_LIST_LENGTH": 50,
+    "epochs": 100,
+    "train_batch_size": 256,
+    "eval_batch_size": 256,
+    "learning_rate": 0.001,
+    "stopping_step": 10,
+    "eval_args": {
+      "group_by": "user",
+      "order": "TO",
+      "split": {
+        "LS": "valid_and_test"
+      },
+      "mode": "full"
+    },
+    "metrics": [
+      "Recall",
+      "MRR",
+      "NDCG",
+      "Hit",
+      "Precision"
+    ],
+    "topk": [
+      1,
+      5,
+      10
+    ],
+    "valid_metric": "NDCG@10",
+    "train_neg_sample_args": null,
+    "device": "cuda",
+    "seed": 42,
+    "reproducibility": true,
+    "show_progress": false,
+    "log_wandb": false,
+    "state": "INFO",
+    "reg_weight": 100.0,
+    "model": "EASE"
+  },
+  "best_hyperparameters": {
+    "reg_weight": 100.0
+  },
+  "seed": 42,
+  "source_hyperparameter_file": "../data/recbole/hpo_results/best_hyperparameters.json",
+  "source_data_files": [
+    "../data/recbole/redial/redial.train.inter",
+    "../data/recbole/redial/redial.valid.inter",
+    "../data/recbole/redial/redial.test.inter"
+  ],
+  "timestamp": "2026-06-01T20:34:56.351821+00:00",
+  "git_commit": "d0a809c24d1f4ce5ac89dde3c7525bc9eb33554a"
+}

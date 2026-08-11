@@ -1,0 +1,45 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info/
+
+# Virtual environments and environment-specific lockfiles
+.venv/
+uv.lock
+
+# Environment variables and credentials
+.env
+.env.*
+!.env.example
+.secrets
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+
+# Local caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+tiktoken_cache/
+
+# RecBole outputs generated during training/evaluation
+saved/
+log_tensorboard/
+log/
+
+# Interrupted or local experiment outputs
+data/processed/*_partial_*
+data/processed/test_prompt_examples_cALL_r10.jsonl
+data/output/*.log
+data/output/*_partial_*
+models/Qwen2.5-7B-Instruct-FT.tar.gz
+models/Qwen2.5-7B-Instruct-FT/
+
+# IDE / OS files
+.idea/
+.vscode/
+*.swp
+.DS_Store

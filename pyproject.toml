@@ -1,0 +1,145 @@
+[project]
+name = "stability"
+version = "0.1.0"
+description = "Exploring stability in LLM-based conversational recommender systems."
+readme = "README.md"
+requires-python = ">=3.10,<3.11"
+dependencies = [
+    "datasets>=4.1.1",
+    "dotenv>=0.9.9",
+    "faiss-cpu>=1.12.0",
+    "httpx>=0.27",
+    "ipywidgets>=8.1.7",
+    "nest-asyncio>=1.6.0",
+    "numpy==1.26.4",
+    "openai>=2.1.0",
+    "pandas==2.2.2",
+    "peft>=0.17.1",
+    "scipy==1.11.4",
+    "seaborn>=0.13.2",
+    "sentence-transformers>=5.1.1",
+    "tiktoken>=0.12.0",
+    "tqdm>=4.67.1",
+    "torch==2.7.0",
+    "trl>=0.23.1",
+    "recbole==1.2.1",
+    "notebook>=7.4.7",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.30.1",
+    "pytest>=8.0.0",
+    "pytest-cov>=7.0.0",
+    "ruff>=0.14.1",
+    "ty>=0.0.15",
+    "uv>=0.9.10",
+]
+
+[tool.uv]
+index-url = "https://pypi.org/simple"
+
+[tool.uv.sources]
+# Pin torch to CUDA 12.8 wheels on Linux GPU servers without resolving every
+# dependency against the PyTorch index. macOS keeps using the standard PyPI CPU wheel.
+torch = [
+    { index = "pytorch-cu128", marker = "sys_platform != 'darwin'" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/stability"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+indent-width = 4
+extend-include = ["*.ipynb"]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    # Conflicting rules
+    "D203",   # incorrect-blank-line-before-class (conflicts with D211)
+    "D213",   # multi-line-summary-second-line (conflicts with D212)
+    "COM812", # missing-trailing-comma (conflicts with formatter)
+    "ISC001", # single-line-implicit-string-concatenation (conflicts with formatter)
+    # Research codebase acceptable
+    "C901",   # too-complex - research code often has complex functions
+    "PLR0912", # too-many-branches
+    "PLR0913", # too-many-arguments
+    "PLR0915", # too-many-statements - research code often has complex functions
+    "FBT001", # boolean-typed-positional-argument
+    "FBT002", # boolean-default-positional-argument
+    "G004",   # logging-f-string - prefer f-strings for readability
+    "D104",   # missing-docstring-in-public-package
+    "E501",   # line-too-long - handled by formatter
+    "S107",   # possible-hardcoded-password - false positive for mask_token
+    "PERF401", # manual-list-comprehension - explicit loops more readable sometimes
+    "FURB110", # if-exp-instead-of-or-operator - ternary clearer sometimes
+    "T201",   # print-found - acceptable in research notebooks
+    "B023",   # function-uses-loop-variable - false positive in some cases
+    "BLE001", # blind-except - acceptable in notebook error handling
+    "PLR2004", # magic-value-comparison - acceptable in notebooks
+    "S101",   # assert-used - acceptable for type narrowing in research code
+    "ERA001", # commented-out-code
+    "S501",  # request-with-no-cert-validation
+]
+fixable = ["ALL"]
+unfixable = []
+extend-select = ["I"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = [
+    "ANN",     # annotations not required in tests
+    "D",       # docstrings not required in tests
+    "RUF012",  # mutable class attributes are intentional in lightweight test doubles
+    "RUF059",  # unused unpacked variables in tests (for testing specific outputs)
+    "S105",    # possible-hardcoded-password - false positive for special tokens
+    "S106",    # possible-hardcoded-password - false positive for mask_token test param
+]
+"scripts/*" = [
+    "ANN",      # research scripts and RecBole objects are not fully typed
+    "D103",     # CLI entry points are self-explanatory
+    "INP001",   # implicit-namespace-package - scripts are not packages
+    "PLC0415",  # local imports defer optional/heavy dependencies
+    "S105",     # false positive for RecBole special tokens such as [PAD]
+    "SLF001",   # RecBole requires access to internal dataset attributes
+    "TC002",    # NumPy is also required at runtime in inference scripts
+]
+"*.ipynb" = [
+    "ANN",      # exploratory notebook helpers are not fully typed
+    "B006",     # notebook-local defaults are not mutated
+    "B007",     # plotting loops may retain labels for readability
+    "B905",     # notebook loops use known equal-length sequences
+    "FBT003",   # plotting APIs accept positional booleans
+    "N806",     # uppercase local constants clarify timestamp ranges
+    "PLC0415",  # local imports defer optional/heavy dependencies
+    "PLR0911",  # notebook helper branching is kept local for readability
+    "PTH123",   # notebook workflows use concise built-in open calls
+    "RUF001",   # mathematical symbols are intentional in display strings
+    "RUF015",   # explicit list indexing is clearer in notebook diagnostics
+    "RUF059",   # unpacked diagnostic values are intentionally retained
+    "RUF100",   # shared notebook code keeps annotation-related noqa markers
+    "S105",     # false positive for RecBole special tokens such as [PAD]
+    "SIM108",   # explicit branches are clearer in parsing cells
+    "TC003",    # runtime annotation imports keep notebook helpers straightforward
+    "SLF001",   # plotting and RecBole notebook APIs require private attributes
+    "TRY300",   # early return keeps checkpoint loading linear
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "lf"
+docstring-code-format = true
+docstring-code-line-length = "dynamic"

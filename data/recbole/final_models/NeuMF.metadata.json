@@ -1,0 +1,89 @@
+{
+  "model_name": "NeuMF",
+  "model_family": "cf",
+  "dataset_name": "redial",
+  "config": {
+    "data_path": "../data/recbole",
+    "dataset": "redial",
+    "benchmark_filename": [
+      "train",
+      "valid",
+      "test"
+    ],
+    "USER_ID_FIELD": "user_id",
+    "ITEM_ID_FIELD": "item_id",
+    "TIME_FIELD": "timestamp",
+    "load_col": {
+      "inter": [
+        "user_id",
+        "item_id",
+        "timestamp"
+      ]
+    },
+    "MAX_ITEM_LIST_LENGTH": 50,
+    "epochs": 100,
+    "train_batch_size": 256,
+    "eval_batch_size": 256,
+    "learning_rate": 0.0005,
+    "stopping_step": 10,
+    "eval_args": {
+      "group_by": "user",
+      "order": "TO",
+      "split": {
+        "LS": "valid_and_test"
+      },
+      "mode": "full"
+    },
+    "metrics": [
+      "Recall",
+      "MRR",
+      "NDCG",
+      "Hit",
+      "Precision"
+    ],
+    "topk": [
+      1,
+      5,
+      10
+    ],
+    "valid_metric": "NDCG@10",
+    "train_neg_sample_args": {
+      "distribution": "uniform",
+      "sample_num": 1,
+      "dynamic": false,
+      "alpha": 1.0,
+      "candidate_num": 0
+    },
+    "device": "cuda",
+    "seed": 42,
+    "reproducibility": true,
+    "show_progress": false,
+    "log_wandb": false,
+    "state": "INFO",
+    "dropout_prob": 0.5,
+    "mlp_hidden_size": [
+      32,
+      16,
+      8
+    ],
+    "model": "NeuMF"
+  },
+  "best_hyperparameters": {
+    "learning_rate": 0.0005,
+    "dropout_prob": 0.5,
+    "mlp_hidden_size": [
+      32,
+      16,
+      8
+    ]
+  },
+  "seed": 42,
+  "source_hyperparameter_file": "../data/recbole/hpo_results/best_hyperparameters.json",
+  "source_data_files": [
+    "../data/recbole/redial/redial.train.inter",
+    "../data/recbole/redial/redial.valid.inter",
+    "../data/recbole/redial/redial.test.inter"
+  ],
+  "timestamp": "2026-06-01T20:08:20.779364+00:00",
+  "git_commit": "f97020dd202baaea8670632f4c5e9b42a0740ca8"
+}

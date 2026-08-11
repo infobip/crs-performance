@@ -1,0 +1,168 @@
+{
+  "Pop": {
+    "params": {},
+    "valid_ndcg@10": 0.0406,
+    "test_result": {
+      "recall@1": 0.0062,
+      "recall@5": 0.0276,
+      "recall@10": 0.0433,
+      "mrr@1": 0.013,
+      "mrr@5": 0.0297,
+      "mrr@10": 0.0335,
+      "ndcg@1": 0.013,
+      "ndcg@5": 0.0216,
+      "ndcg@10": 0.0276,
+      "hit@1": 0.013,
+      "hit@5": 0.0561,
+      "hit@10": 0.0851,
+      "precision@1": 0.013,
+      "precision@5": 0.0114,
+      "precision@10": 0.0088
+    }
+  },
+  "Random": {
+    "params": {},
+    "valid_ndcg@10": 0.0019,
+    "test_result": {
+      "recall@1": 0.0,
+      "recall@5": 0.0016,
+      "recall@10": 0.0016,
+      "mrr@1": 0.0,
+      "mrr@5": 0.0011,
+      "mrr@10": 0.0011,
+      "ndcg@1": 0.0,
+      "ndcg@5": 0.0009,
+      "ndcg@10": 0.0009,
+      "hit@1": 0.0,
+      "hit@5": 0.003,
+      "hit@10": 0.003,
+      "precision@1": 0.0,
+      "precision@5": 0.0006,
+      "precision@10": 0.0003
+    }
+  },
+  "BPR": {
+    "params": {
+      "learning_rate": 0.0005
+    },
+    "valid_ndcg@10": 0.1204,
+    "test_result": {
+      "recall@1": 0.0365,
+      "recall@5": 0.1074,
+      "recall@10": 0.1416,
+      "mrr@1": 0.0711,
+      "mrr@5": 0.1102,
+      "mrr@10": 0.1164,
+      "ndcg@1": 0.0711,
+      "ndcg@5": 0.0862,
+      "ndcg@10": 0.0991,
+      "hit@1": 0.0711,
+      "hit@5": 0.1812,
+      "hit@10": 0.2282,
+      "precision@1": 0.0711,
+      "precision@5": 0.0404,
+      "precision@10": 0.0266
+    }
+  },
+  "ItemKNN": {
+    "params": {
+      "k": 400,
+      "shrink": 1.0
+    },
+    "valid_ndcg@10": 0.1124,
+    "test_result": {
+      "recall@1": 0.0343,
+      "recall@5": 0.1001,
+      "recall@10": 0.1401,
+      "mrr@1": 0.0631,
+      "mrr@5": 0.0986,
+      "mrr@10": 0.1069,
+      "ndcg@1": 0.0631,
+      "ndcg@5": 0.0792,
+      "ndcg@10": 0.0944,
+      "hit@1": 0.0631,
+      "hit@5": 0.1642,
+      "hit@10": 0.2252,
+      "precision@1": 0.0631,
+      "precision@5": 0.036,
+      "precision@10": 0.0255
+    }
+  },
+  "EASE": {
+    "params": {
+      "reg_weight": 100.0
+    },
+    "valid_ndcg@10": 0.1377,
+    "test_result": {
+      "recall@1": 0.0375,
+      "recall@5": 0.1271,
+      "recall@10": 0.1727,
+      "mrr@1": 0.0751,
+      "mrr@5": 0.1256,
+      "mrr@10": 0.1343,
+      "ndcg@1": 0.0751,
+      "ndcg@5": 0.1,
+      "ndcg@10": 0.1171,
+      "hit@1": 0.0751,
+      "hit@5": 0.2122,
+      "hit@10": 0.2763,
+      "precision@1": 0.0751,
+      "precision@5": 0.0478,
+      "precision@10": 0.0323
+    }
+  },
+  "LightGCN": {
+    "params": {
+      "learning_rate": 0.005,
+      "n_layers": 4,
+      "reg_weight": 0.01
+    },
+    "valid_ndcg@10": 0.1272,
+    "test_result": {
+      "recall@1": 0.0285,
+      "recall@5": 0.1014,
+      "recall@10": 0.1568,
+      "mrr@1": 0.0581,
+      "mrr@5": 0.0964,
+      "mrr@10": 0.1073,
+      "ndcg@1": 0.0581,
+      "ndcg@5": 0.0774,
+      "ndcg@10": 0.0986,
+      "hit@1": 0.0581,
+      "hit@5": 0.1732,
+      "hit@10": 0.2543,
+      "precision@1": 0.0581,
+      "precision@5": 0.0384,
+      "precision@10": 0.0297
+    }
+  },
+  "NeuMF": {
+    "params": {
+      "learning_rate": 0.0005,
+      "dropout_prob": 0.5,
+      "mlp_hidden_size": [
+        32,
+        16,
+        8
+      ]
+    },
+    "valid_ndcg@10": 0.1165,
+    "test_result": {
+      "recall@1": 0.0311,
+      "recall@5": 0.0977,
+      "recall@10": 0.1362,
+      "mrr@1": 0.0621,
+      "mrr@5": 0.0955,
+      "mrr@10": 0.1035,
+      "ndcg@1": 0.0621,
+      "ndcg@5": 0.0764,
+      "ndcg@10": 0.0912,
+      "hit@1": 0.0621,
+      "hit@5": 0.1652,
+      "hit@10": 0.2222,
+      "precision@1": 0.0621,
+      "precision@5": 0.0368,
+      "precision@10": 0.0257
+    }
+  }
+}

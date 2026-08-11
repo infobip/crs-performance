@@ -1,0 +1,45 @@
+{
+  "timestamp": "2026-06-01T20:44:47.882863+00:00",
+  "source_notebook": "11_recbole_evaluation_sequential.ipynb",
+  "models": [
+    "SASRec",
+    "GRU4Rec",
+    "NARM",
+    "SRGNN"
+  ],
+  "config": {
+    "retrain_final_models": false,
+    "allow_stale_checkpoints": false,
+    "ranked_list_top_n": 100,
+    "metric_cutoffs": [
+      1,
+      5,
+      10
+    ]
+  },
+  "dataset_paths": {
+    "train": "../data/recbole/redial_seq/redial_seq.train.inter",
+    "valid": "../data/recbole/redial_seq/redial_seq.valid.inter",
+    "test": "../data/recbole/redial_seq/redial_seq.test.inter",
+    "catalog": "../data/recbole/redial_seq/redial_seq.item",
+    "metadata": "../data/processed/movies_metadata_tmdb.csv"
+  },
+  "hyperparameter_source": "../data/recbole/hpo_results_seq/best_hyperparameters.json",
+  "checkpoint_paths": {
+    "SASRec": "../data/recbole/final_models_seq/SASRec.pth",
+    "GRU4Rec": "../data/recbole/final_models_seq/GRU4Rec.pth",
+    "NARM": "../data/recbole/final_models_seq/NARM.pth",
+    "SRGNN": "../data/recbole/final_models_seq/SRGNN.pth"
+  },
+  "checkpoint_decisions": {
+    "SASRec": "loaded",
+    "GRU4Rec": "loaded",
+    "NARM": "loaded",
+    "SRGNN": "loaded"
+  },
+  "output_files": [
+    "../data/recbole/evaluation_results/seq_ranked_lists.parquet",
+    "../data/recbole/evaluation_results/seq_aggregate_metrics.parquet"
+  ],
+  "git_commit": "d0a809c24d1f4ce5ac89dde3c7525bc9eb33554a"
+}
